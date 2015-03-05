@@ -1,10 +1,9 @@
-package mygame;
+package tobiasschuerg.sphere;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.PointLight;
 import com.jme3.material.Material;
-import com.jme3.material.RenderState;
 import com.jme3.material.RenderState.BlendMode;
 import com.jme3.material.RenderState.FaceCullMode;
 import com.jme3.math.ColorRGBA;
@@ -13,24 +12,19 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.Mesh;
-import com.jme3.scene.debug.WireBox;
-import com.jme3.scene.shape.Box;
 import com.jme3.scene.shape.Quad;
 import com.jme3.scene.shape.Sphere;
 import com.jme3.texture.Texture;
-import java.util.Vector;
-import javax.vecmath.Vector3d;
 
 /**
  * test
  *
- * @author normenhansen
+ * @author Tobias Schürg
  */
-public class Main extends SimpleApplication {
+public class SphereUIExample extends SimpleApplication {
 
     public static void main(String[] args) {
-        Main app = new Main();
+        SphereUIExample app = new SphereUIExample();
         app.start();
     }
 
