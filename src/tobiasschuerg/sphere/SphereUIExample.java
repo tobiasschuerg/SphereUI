@@ -1,6 +1,8 @@
 package tobiasschuerg.sphere;
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.app.StatsAppState;
+import com.jme3.input.event.MouseMotionEvent;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.PointLight;
 import com.jme3.material.Material;
@@ -12,9 +14,17 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Quad;
 import com.jme3.scene.shape.Sphere;
 import com.jme3.texture.Texture;
+import com.simsilica.lemur.GuiGlobals;
+import com.simsilica.lemur.event.CursorEventControl;
+import com.simsilica.lemur.event.MouseEventControl;
+
+import tobiasschuerg.lemur.piemenu.example.CameraMovementFunctions;
+import tobiasschuerg.lemur.piemenu.example.CameraMovementState;
+import tobiasschuerg.lemur.piemenu.example.CameraToggleState;
 
 /**
  * test
@@ -28,8 +38,16 @@ public class SphereUIExample extends SimpleApplication {
         app.start();
     }
 
+    public SphereUIExample() {
+        super(new StatsAppState(), new CameraMovementState(), new CameraToggleState());
+    }
+
     @Override
     public void simpleInitApp() {
+
+        GuiGlobals.initialize(this);
+        CameraMovementFunctions.initializeDefaultMappings(GuiGlobals.getInstance().getInputMapper());
+
         createFloor();
 
         //WireBox b = new WireBox(1, 1, 1);
@@ -50,15 +68,20 @@ public class SphereUIExample extends SimpleApplication {
         geom.rotate(0f, 1f, 0f);
         geom.setLocalTranslation(getCamera().getLocation());
 
+        CursorEventControl.addListenersToSpatial(geom, new SphereListener());
+
         // add light
         PointLight lamp_light = new PointLight();
 
         lamp_light.setColor(ColorRGBA.Yellow);
-        lamp_light.setRadius(4f);
-        lamp_light.setPosition(new Vector3f());
-        rootNode.addLight(lamp_light);
 
+        lamp_light.setRadius(
+                4f);
+        lamp_light.setPosition(
+                new Vector3f());
+        rootNode.addLight(lamp_light);
         AmbientLight al = new AmbientLight();
+
         al.setColor(ColorRGBA.White.mult(1.3f));
         rootNode.addLight(al);
 
