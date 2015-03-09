@@ -59,6 +59,7 @@ public class SphereUIExample extends SimpleApplication {
                 teapot.setLocalTranslation(point);
                 teapot.setLocalScale(0.5f);
                 getRootNode().attachChild(teapot);
+                teapot.setLocalRotation(getCamera().getRotation());
             }
         };
         getStateManager().attach(sphereAppState);
@@ -105,9 +106,10 @@ public class SphereUIExample extends SimpleApplication {
         Geometry floor = new Geometry("floor", q);
         Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
 
-        Texture cube1Tex = assetManager.loadTexture(
+        Texture tex = assetManager.loadTexture(
                 "Textures/Terrain/BrickWall/BrickWall.jpg");
-        mat.setTexture("ColorMap", cube1Tex);
+        tex.setWrap(Texture.WrapMode.Repeat);
+        mat.setTexture("ColorMap", tex);
 
         mat.setColor("Color", ColorRGBA.Brown);
         floor.setMaterial(mat);
